@@ -1,14 +1,18 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 contract Counter {
-    uint256 public number;
+    uint256 private number;
 
-    function setNumber(uint256 newNumber) public {
+    function getNumber() external view virtual returns (uint256) {
+        return number;
+    }
+
+    function setNumber(uint256 newNumber) external virtual {
         number = newNumber;
     }
 
-    function increment() public {
+    function increment() external virtual {
         number++;
     }
 }
