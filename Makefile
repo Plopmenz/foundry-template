@@ -5,6 +5,10 @@ deploy:
 	${MAKE} --directory=./web3webdeploy deploy
 .PHONY: deploy
 
+update:
+	git submodule update --init --recursive
+.PHONY: update
+
 # Analyzers
 slither:
 	${MAKE}  --directory=./analyzers/slither dev
