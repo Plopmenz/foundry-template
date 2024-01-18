@@ -1,10 +1,17 @@
-import { Deployer } from "../web3webdeploy/types";
+import { Address, Deployer } from "../web3webdeploy/types";
 import { deployCounter } from "./counters/Counter";
 import { deployProxyCounter } from "./counters/ProxyCounter";
 
-export async function deploy(deployer: Deployer) {
-  console.log("Starting deployment");
-  const counterAddress = await deployCounter(deployer);
-  await deployProxyCounter(deployer, counterAddress);
-  console.log("Finished deployment");
+export interface Deployment {
+  counter: Address;
+  proxyCounter: Address;
+}
+
+export async function deploy(deployer: Deployer): Promise<Deployment> {
+  const counter = await deployCounter(deployer);
+  const proxyCounter = await deployProxyCounter(deployer, counter);
+  return {
+    counter: counter,
+    proxyCounter: proxyCounter,
+  };
 }
