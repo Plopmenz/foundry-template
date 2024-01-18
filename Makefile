@@ -6,7 +6,7 @@ deploy:
 .PHONY: deploy
 
 update:
-	git submodule update --init --recursive
+	git submodule update --init --recursive --remote
 .PHONY: update
 
 # Analyzers
