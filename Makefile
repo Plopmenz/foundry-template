@@ -5,9 +5,11 @@ deploy:
 	${MAKE} --directory=./web3webdeploy deploy
 .PHONY: deploy
 
+# Update all direct submodules
+# Init all submodules of submodules (of submodules, etc.)
 update:
-	git submodule update --init --remote # Update all direct submodules
-	git submodule update --init --recursive # Init all submodules of submodules (of submodules, etc.)
+	git submodule update --init --remote
+	git submodule update --init --recursive
 .PHONY: update
 
 # Rebase preferring our commits over the template changes
@@ -15,8 +17,8 @@ update:
 template-update:
 	git remote add template https://github.com/Plopmenz/foundry-template.git
 	git fetch template
-	git rebase template/main -X ours --autosquash 
-	git rebase --skip
+	git rebase template/main -X theirs --autosquash || true
+	git rebase --skip || true
 	git remote remove template
 	${MAKE} clean
 .PHONY: template-update
