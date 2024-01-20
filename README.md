@@ -39,6 +39,7 @@ make deploy
 
 ```shell
 make slither
+make mythril TARGET=Counter.sol
 ```
 
 ### Help
