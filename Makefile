@@ -12,20 +12,34 @@ update:
 	git submodule update --init --recursive
 .PHONY: update
 
-# Rebase preferring our commits over the template changes
-# Submodules updates will throw a merge error (those are skipped and need to be updated with the regular update command)
+# Merge preferring our commits over the template changes
 template-update:
 	git remote add template https://github.com/Plopmenz/foundry-template.git
 	git fetch template
-	git rebase template/main -X theirs --autosquash || true
-	git rebase --skip || true
+	git merge template/main -X ours --squash --allow-unrelated-histories || true
 	git remote remove template
 	${MAKE} clean
 .PHONY: template-update
 
+# Merge without preference in merge conflicts
+template-update-manual:
+	git remote add template https://github.com/Plopmenz/foundry-template.git
+	git fetch template
+	git merge template/main --squash --allow-unrelated-histories || true
+	git remote remove template
+	${MAKE} clean
+.PHONY: template-update-manual
+
 # Possible we could also add the following, but is there a need?
 # Ideally these also take the configuration in consideration
 clean:
+	rm -rf deploy/counters/Counter.ts
+	rm -rf deploy/counters/ProxyCounter.ts
+	rmdir deploy/counters
+	rm -rf src/Counter.sol
+	rm -rf src/ProxyCounter.sol
+	rm -rf test/Counter.t.sol
+
 	rm -rf ./web3webdeploy/.next 
 	rm -rf cache
 	rm -rf out
