@@ -45,9 +45,14 @@ clean:
 .PHONY: clean
 
 # Analyzers
+analyze:
+	${MAKE}  --directory=./analyzers all
+.PHONY: analyze
+
 slither:
-	${MAKE}  --directory=./analyzers/slither dev
-	. ./analyzers/slither/env/bin/activate && slither .
+	${MAKE}  --directory=./analyzers slither
 .PHONY: slither
 
-# TODO, add mythril analzer: https://github.com/ConsenSys/mythril
+mythril:
+	${MAKE}  --directory=./analyzers mythril
+.PHONY: mythril
