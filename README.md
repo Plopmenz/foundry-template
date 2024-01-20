@@ -20,13 +20,13 @@ https://book.getfoundry.sh/
 ### Build
 
 ```shell
-$ forge build
+forge build
 ```
 
 ### Test
 
 ```shell
-$ forge test
+forge test
 ```
 
 ### Deploy
@@ -45,7 +45,7 @@ make mythril TARGET=Counter.sol
 ### Help
 
 ```shell
-$ forge --help
-$ anvil --help
-$ cast --help
+forge --help
+anvil --help
+cast --help
 ```
