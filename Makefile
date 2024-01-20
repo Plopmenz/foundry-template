@@ -5,11 +5,10 @@ deploy:
 	${MAKE} --directory=./web3webdeploy deploy
 .PHONY: deploy
 
-# Update all direct submodules
-# Init all submodules of submodules (of submodules, etc.)
+# Update all submodules (and submodules of submodules of submodules etc.) to the latest version
+# This will by default get the latest head or whatever branch is specific in .gitmodules
 update:
-	git submodule update --init --remote
-	git submodule update --init --recursive
+	git submodule update --init --recursive --remote
 .PHONY: update
 
 # Merge preferring our commits over the template changes
