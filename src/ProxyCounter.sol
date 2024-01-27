@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import {Counter} from "./Counter.sol";
 
 contract ProxyCounter is Counter {
-    Counter immutable proxyCounter;
+    Counter private immutable proxyCounter;
 
     constructor(Counter counter) {
         proxyCounter = counter;
