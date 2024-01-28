@@ -16,6 +16,12 @@ update:
 	git submodule update --init --recursive --remote
 .PHONY: update
 
+# Discard any commits/updates done to submodules
+revert-submodules:
+	git submodule deinit -f .
+	git submodule update --init --recursive --checkout
+.PHONY: revert-submodules
+
 # Merge preferring our commits over the template changes
 template-update:
 	git remote add template https://github.com/Plopmenz/foundry-template.git
