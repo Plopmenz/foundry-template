@@ -29,7 +29,7 @@ template-update:
 	git remote add template https://github.com/Plopmenz/foundry-template.git
 	git fetch template
 	git show template/main:template.version > newest.version
-	git cherry-pick --no-commit template/main~$$(($$((cat newest.version)) - $$((cat template.version)))) template/main
+	git cherry-pick --no-commit template/main~$$(expr $$(cat newest.version) - $$(cat template.version)) template/main || true
 	rm newest.version
 	git remote remove template
 	${MAKE} clean
