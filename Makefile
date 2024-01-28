@@ -14,6 +14,7 @@ local-fund:
 # This will by default get the latest head or whatever branch is specific in .gitmodules
 update:
 	git submodule update --init --recursive --remote
+	${MAKE} clean
 .PHONY: update
 
 # Discard any commits/updates done to submodules
@@ -22,27 +23,27 @@ revert-submodules:
 	git submodule update --init --recursive --checkout
 .PHONY: revert-submodules
 
-# Merge preferring our commits over the template changes
+# Add all commits made since our last update (1 version == 1 commit)
+# Gets the latest (newest version - our version) commits of the template
 template-update:
 	git remote add template https://github.com/Plopmenz/foundry-template.git
 	git fetch template
-	git merge template/main -X ours --squash --allow-unrelated-histories || true
+	git show template/main:template.version > newest.version
+	git cherry-pick --no-commit template/main~$$(($$((cat newest.version)) - $$((cat template.version)))) template/main
+	rm newest.version
 	git remote remove template
-	${MAKE} empty
 	${MAKE} clean
 .PHONY: template-update
 
 # Merge without preference in merge conflicts
-template-update-manual:
+template-update-fromstart:
 	git remote add template https://github.com/Plopmenz/foundry-template.git
 	git fetch template
 	git merge template/main --squash --allow-unrelated-histories || true
 	git remote remove template
-	${MAKE} empty
-	${MAKE} clean
-.PHONY: template-update-manual
+.PHONY: template-update-fromstart
 
-# Remove template example files
+# Remove the template example files
 empty:
 	rm -rf deploy/counters/Counter.ts
 	rm -rf deploy/counters/ProxyCounter.ts
@@ -53,6 +54,7 @@ empty:
 	rm -rf test/ProxyCounter.t.sol
 .PHONY: empty
 
+# Clean cache and artifacts
 # Ideally these also take the configuration in consideration
 clean:
 	rm -rf ./web3webdeploy/.next 
