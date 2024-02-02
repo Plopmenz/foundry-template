@@ -1,7 +1,13 @@
-import { Deployer } from "../../web3webdeploy/types";
+import { DeployInfo, Deployer } from "../../web3webdeploy/types";
 import { Buffer } from "buffer";
 
-export async function deployCounter(deployer: Deployer) {
+export interface DeployCounterSettings
+  extends Omit<DeployInfo, "contract" | "args"> {}
+
+export async function deployCounter(
+  deployer: Deployer,
+  settings: DeployCounterSettings
+) {
   return await deployer.deploy({
     id: "Counter",
     contract: "Counter",
@@ -12,5 +18,6 @@ export async function deployCounter(deployer: Deployer) {
         "hex"
       )
     ),
+    ...settings,
   });
 }
