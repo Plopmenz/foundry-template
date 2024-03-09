@@ -8,11 +8,13 @@ export interface DeployProxyCounterSettings
 export async function deployProxyCounter(
   deployer: Deployer,
   settings: DeployProxyCounterSettings
-) {
-  return await deployer.deploy({
-    id: "ProxyCounter",
-    contract: "ProxyCounter",
-    args: [settings.counter],
-    ...settings,
-  });
+): Promise<Address> {
+  return await deployer
+    .deploy({
+      id: "ProxyCounter",
+      contract: "ProxyCounter",
+      args: [settings.counter],
+      ...settings,
+    })
+    .then((deployment) => deployment.address);
 }

@@ -9,8 +9,8 @@ export interface SetInitialCounterValueSettings
 export async function setIntialCounterValue(
   deployer: Deployer,
   settings: SetInitialCounterValueSettings
-) {
-  return await deployer.execute({
+): Promise<void> {
+  await deployer.execute({
     id: "InitialCounterNumber",
     abi: "Counter",
     to: settings.counter,

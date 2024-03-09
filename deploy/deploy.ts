@@ -16,6 +16,7 @@ export interface DeploymentSettings {
     SetInitialCounterValueSettings,
     "counter"
   >;
+  forceRedeploy?: boolean;
 }
 
 export interface Deployment {
@@ -27,6 +28,10 @@ export async function deploy(
   deployer: Deployer,
   settings?: DeploymentSettings
 ): Promise<Deployment> {
+  if (settings?.forceRedeploy !== undefined && !settings.forceRedeploy) {
+    return await deployer.getDeployment();
+  }
+
   const counter = await deployCounter(
     deployer,
     settings?.counterSettings ?? {}
