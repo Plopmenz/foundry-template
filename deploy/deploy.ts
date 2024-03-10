@@ -29,7 +29,7 @@ export async function deploy(
   settings?: DeploymentSettings
 ): Promise<Deployment> {
   if (settings?.forceRedeploy !== undefined && !settings.forceRedeploy) {
-    return await deployer.getDeployment();
+    return await deployer.loadDeployment({ deploymentName: "latest.json" });
   }
 
   const counter = await deployCounter(
@@ -45,8 +45,13 @@ export async function deploy(
     counter: counter,
   });
 
-  return {
+  const deployment = {
     counter: counter,
     proxyCounter: proxyCounter,
   };
+  await deployer.saveDeployment({
+    deploymentName: "latest.json",
+    deployment: deployment,
+  });
+  return deployment;
 }

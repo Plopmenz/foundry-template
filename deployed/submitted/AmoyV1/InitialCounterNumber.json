@@ -1,7 +1,7 @@
 {
   "type": "function",
   "id": "InitialCounterNumber",
-  "batch": "SepoliaV1",
+  "batch": "AmoyV1",
   "functionName": "setNumber",
   "functionArgs": ["3"],
   "to": "0xF6E1684f1521376Bc1f36dcf44340bBef40deebc",
@@ -10,14 +10,14 @@
   "gas": "43444",
   "from": "0xaF7E68bCb2Fc7295492A00177f14F59B92814e70",
   "transactionSettings": {
-    "chainId": 11155111,
-    "nonce": "97",
-    "baseFee": "1120752724",
+    "chainId": 80002,
+    "nonce": "2",
+    "baseFee": "48575716203",
     "priorityFee": "1000000000"
   },
   "source": "/home/plopmenz/foundry-template",
   "submitted": {
-    "transactionHash": "0x133991f384e7f3d1bb768c2a25521c9267e2e2c147ea129c3315bf4cae0ed040",
-    "date": "2024-03-09T20:03:04.575Z"
+    "transactionHash": "0x004eecbdc6558dd7062512634c3419f756344216a1db493acaa100c75be3004b",
+    "date": "2024-03-10T14:01:31.894Z"
   }
 }

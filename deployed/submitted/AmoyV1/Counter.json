@@ -1,7 +1,7 @@
 {
   "type": "deployment",
   "id": "Counter",
-  "batch": "SepoliaV1",
+  "batch": "AmoyV1",
   "deploymentAddress": "0xF6E1684f1521376Bc1f36dcf44340bBef40deebc",
   "constructorArgs": [],
   "to": "0x4e59b44847b379578588920ca78fbf26c0b4956c",
@@ -10,9 +10,9 @@
   "gas": "101865",
   "from": "0xaF7E68bCb2Fc7295492A00177f14F59B92814e70",
   "transactionSettings": {
-    "chainId": 11155111,
-    "nonce": "95",
-    "baseFee": "1120752724",
+    "chainId": 80002,
+    "nonce": "0",
+    "baseFee": "48575716203",
     "priorityFee": "1000000000"
   },
   "salt": "0x07208e7ecf628e1095711165b8ef16d18539fa71b914042fec53d63c160c216c",
@@ -69,7 +69,7 @@
   },
   "source": "/home/plopmenz/foundry-template",
   "submitted": {
-    "transactionHash": "0x229dcef4989007e53ac6f748d501bfe316924cc6a546fb0e0ea06997b4189cda",
-    "date": "2024-03-09T20:02:56.710Z"
+    "transactionHash": "0x655946c5285325def3bed816af91da86fb8962daab57ea049891324e6ffb9e0d",
+    "date": "2024-03-10T14:01:22.187Z"
   }
 }
