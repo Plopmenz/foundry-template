@@ -6,7 +6,7 @@ export interface SetInitialCounterValueSettings
   counterValue: bigint;
 }
 
-export async function setIntialCounterValue(
+export async function setInitialCounterValue(
   deployer: Deployer,
   settings: SetInitialCounterValueSettings
 ): Promise<void> {

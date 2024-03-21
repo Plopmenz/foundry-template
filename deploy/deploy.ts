@@ -6,13 +6,13 @@ import {
 } from "./counters/ProxyCounter";
 import {
   SetInitialCounterValueSettings,
-  setIntialCounterValue,
+  setInitialCounterValue,
 } from "./counters/SetInitialCounterValue";
 
 export interface DeploymentSettings {
   counterSettings: DeployCounterSettings;
   proxyCounterSettings: Omit<DeployProxyCounterSettings, "counter">;
-  setIntialCounterValueSettings: Omit<
+  setInitialCounterValueSettings: Omit<
     SetInitialCounterValueSettings,
     "counter"
   >;
@@ -29,7 +29,12 @@ export async function deploy(
   settings?: DeploymentSettings
 ): Promise<Deployment> {
   if (settings?.forceRedeploy !== undefined && !settings.forceRedeploy) {
-    return await deployer.loadDeployment({ deploymentName: "latest.json" });
+    const existingDeployment = await deployer.loadDeployment({
+      deploymentName: "latest.json",
+    });
+    if (existingDeployment !== undefined) {
+      return existingDeployment;
+    }
   }
 
   const counter = await deployCounter(
@@ -40,8 +45,10 @@ export async function deploy(
     ...(settings?.proxyCounterSettings ?? {}),
     counter: counter,
   });
-  await setIntialCounterValue(deployer, {
-    ...(settings?.setIntialCounterValueSettings ?? { counterValue: BigInt(3) }),
+  await setInitialCounterValue(deployer, {
+    ...(settings?.setInitialCounterValueSettings ?? {
+      counterValue: BigInt(3),
+    }),
     counter: counter,
   });
 
