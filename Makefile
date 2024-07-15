@@ -47,14 +47,17 @@ template-update-fromstart:
 	git remote remove template
 .PHONY: template-update-fromstart
 
-# Remove the template example files
+# Remove the template example files (you should remove the deployed and export folders manually, as this would be dangerous to perform automatically)
 empty:
 	rm -rf deploy/counters/Counter.ts
 	rm -rf deploy/counters/ProxyCounter.ts
+	rm -rf deploy/counters/CounterDeployer.ts
+	rm -rf deploy/counters/DeployedCounter.ts
 	rm -rf deploy/counters/SetInitialCounterValue.ts
 	rmdir deploy/counters || true
 
 	rm -rf src/Counter.sol
+	rm -rf src/CounterDeployer.sol
 	rm -rf src/ProxyCounter.sol
 
 	rm -rf test/Counter.t.sol

@@ -1,6 +1,14 @@
 import { Address, Deployer } from "../web3webdeploy/types";
 import { DeployCounterSettings, deployCounter } from "./counters/Counter";
 import {
+  deployCounterDeployer,
+  DeployCounterDeployerSettings,
+} from "./counters/CounterDeployer";
+import {
+  deployDeployedCounter,
+  DeployDeployedCounterSettings,
+} from "./counters/DeployedCounter";
+import {
   DeployProxyCounterSettings,
   deployProxyCounter,
 } from "./counters/ProxyCounter";
@@ -10,18 +18,17 @@ import {
 } from "./counters/SetInitialCounterValue";
 
 export interface DeploymentSettings {
-  counterSettings: DeployCounterSettings;
-  proxyCounterSettings: Omit<DeployProxyCounterSettings, "counter">;
-  setInitialCounterValueSettings: Omit<
-    SetInitialCounterValueSettings,
-    "counter"
+  counterDeployerSettings: DeployCounterDeployerSettings;
+  deployedCounterSettings: Omit<
+    DeployDeployedCounterSettings,
+    "counterDeployer"
   >;
   forceRedeploy?: boolean;
 }
 
 export interface Deployment {
-  counter: Address;
-  proxyCounter: Address;
+  counterDeployer: Address;
+  deployedCounter: Address;
 }
 
 export async function deploy(
@@ -30,34 +37,28 @@ export async function deploy(
 ): Promise<Deployment> {
   if (settings?.forceRedeploy !== undefined && !settings.forceRedeploy) {
     const existingDeployment = await deployer.loadDeployment({
-      deploymentName: "V1.json",
+      deploymentName: "V2.json",
     });
     if (existingDeployment !== undefined) {
       return existingDeployment;
     }
   }
 
-  const counter = await deployCounter(
+  const counterDeployer = await deployCounterDeployer(
     deployer,
-    settings?.counterSettings ?? {}
+    settings?.counterDeployerSettings ?? {}
   );
-  const proxyCounter = await deployProxyCounter(deployer, {
-    ...(settings?.proxyCounterSettings ?? {}),
-    counter: counter,
-  });
-  await setInitialCounterValue(deployer, {
-    ...(settings?.setInitialCounterValueSettings ?? {
-      counterValue: BigInt(3),
-    }),
-    counter: counter,
+  const deployedCounter = await deployDeployedCounter(deployer, {
+    ...(settings?.deployedCounterSettings ?? {}),
+    counterDeployer: counterDeployer,
   });
 
   const deployment = {
-    counter: counter,
-    proxyCounter: proxyCounter,
+    counterDeployer: counterDeployer,
+    deployedCounter: deployedCounter,
   };
   await deployer.saveDeployment({
-    deploymentName: "V1.json",
+    deploymentName: "V2.json",
     deployment: deployment,
   });
   return deployment;

@@ -1,0 +1,71 @@
+{
+  "type": "deployment",
+  "id": "CounterDeployer",
+  "batch": "SepoliaV2",
+  "batchIndex": 0,
+  "deploymentAddress": "0xC71E721dC8312370397dC6DccFbA977364BF84a4",
+  "constructorArgs": [],
+  "to": "0x4e59b44847b379578588920ca78fbf26c0b4956c",
+  "value": "0",
+  "data": "0x000000000000000000000000000000000000000000000000706c6f706d656e7a60808060405234610016576101db908161001b8239f35b5f80fdfe6080806040526004361015610012575f80fd5b5f3560e01c63775c300c14610025575f80fd5b346100b5575f3660031901126100b55760ec80820182811067ffffffffffffffff8211176100a15782916100ba833903905ff08015610096576040516001600160a01b0390911681527f6f226dfe6f3c1cd2d22b2988f136a8767cc88e1389c3bbfb8006bf341e24dbe190602090a1005b6040513d5f823e3d90fd5b634e487b7160e01b5f52604160045260245ffd5b5f80fdfe608080604052346100155760d2908161001a8239f35b5f80fdfe608060405260043610156010575f80fd5b5f3560e01c80633fb5c1cb146086578063d09de08a1460545763f2c9ecd8146036575f80fd5b346050575f36600319011260505760205f54604051908152f35b5f80fd5b346050575f3660031901126050575f545f1981146072576001015f55005b634e487b7160e01b5f52601160045260245ffd5b3460505760203660031901126050576004355f5500fea2646970667358221220079c3b3b452d80748e93562f4c8ad6622693205ce4fb0a8fce269b0a7e22b7cf64736f6c63430008170033a264697066735822122060c1167f563f002a4feb462d269a656e8415a76f6886fa67f999cd434d03c30364736f6c63430008170033",
+  "gas": "157946",
+  "from": "0xaF7E68bCb2Fc7295492A00177f14F59B92814e70",
+  "transactionSettings": {
+    "chainId": 11155111,
+    "nonce": "393",
+    "baseFee": "11784897673",
+    "priorityFee": "10000000"
+  },
+  "salt": "\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000plopmenz",
+  "artifact": {
+    "abi": [
+      {
+        "type": "function",
+        "name": "deploy",
+        "inputs": [],
+        "outputs": [],
+        "stateMutability": "nonpayable"
+      },
+      {
+        "type": "event",
+        "name": "CounterDeployed",
+        "inputs": [
+          {
+            "name": "counter",
+            "type": "address",
+            "indexed": false,
+            "internalType": "contract Counter"
+          }
+        ],
+        "anonymous": false
+      }
+    ],
+    "bytecode": "0x60808060405234610016576101db908161001b8239f35b5f80fdfe6080806040526004361015610012575f80fd5b5f3560e01c63775c300c14610025575f80fd5b346100b5575f3660031901126100b55760ec80820182811067ffffffffffffffff8211176100a15782916100ba833903905ff08015610096576040516001600160a01b0390911681527f6f226dfe6f3c1cd2d22b2988f136a8767cc88e1389c3bbfb8006bf341e24dbe190602090a1005b6040513d5f823e3d90fd5b634e487b7160e01b5f52604160045260245ffd5b5f80fdfe608080604052346100155760d2908161001a8239f35b5f80fdfe608060405260043610156010575f80fd5b5f3560e01c80633fb5c1cb146086578063d09de08a1460545763f2c9ecd8146036575f80fd5b346050575f36600319011260505760205f54604051908152f35b5f80fd5b346050575f3660031901126050575f545f1981146072576001015f55005b634e487b7160e01b5f52601160045260245ffd5b3460505760203660031901126050576004355f5500fea2646970667358221220079c3b3b452d80748e93562f4c8ad6622693205ce4fb0a8fce269b0a7e22b7cf64736f6c63430008170033a264697066735822122060c1167f563f002a4feb462d269a656e8415a76f6886fa67f999cd434d03c30364736f6c63430008170033",
+    "compiler": { "version": "v0.8.23+commit.f704f362" },
+    "contractName": "src/CounterDeployer.sol:CounterDeployer",
+    "jsonDescription": {
+      "language": "Solidity",
+      "sources": {
+        "src/Counter.sol": {
+          "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract Counter {\n    uint256 private number;\n\n    function getNumber() external view virtual returns (uint256) {\n        return number;\n    }\n\n    function setNumber(uint256 newNumber) external virtual {\n        number = newNumber;\n    }\n\n    function increment() external virtual {\n        number++;\n    }\n}\n"
+        },
+        "src/CounterDeployer.sol": {
+          "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nimport {Counter} from \"./Counter.sol\";\n\ncontract CounterDeployer {\n    event CounterDeployed(Counter counter);\n\n    function deploy() external {\n        Counter counter = new Counter();\n        emit CounterDeployed(counter);\n    }\n}\n"
+        }
+      },
+      "settings": {
+        "remappings": ["forge-std/=lib/forge-std/src/"],
+        "optimizer": { "enabled": true, "runs": 200 },
+        "evmVersion": "shanghai",
+        "viaIR": true
+      },
+      "metadata": { "useLiteralContent": true }
+    },
+    "license": "MIT"
+  },
+  "source": "/home/plopmenz/foundry-template",
+  "submitted": {
+    "transactionHash": "0xbf5281241a00c068c1f127db88c93fe0fd27f16e3df1fddc3c8aecd0d425b4db",
+    "date": "2024-07-15T13:55:00.976Z"
+  }
+}

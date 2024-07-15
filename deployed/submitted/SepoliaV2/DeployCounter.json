@@ -1,0 +1,83 @@
+{
+  "type": "function",
+  "id": "DeployCounter",
+  "batch": "SepoliaV2",
+  "batchIndex": 1,
+  "functionName": "deploy",
+  "functionArgs": [],
+  "to": "0xC71E721dC8312370397dC6DccFbA977364BF84a4",
+  "value": "0",
+  "data": "0x775c300c",
+  "gas": "96493",
+  "from": "0xaF7E68bCb2Fc7295492A00177f14F59B92814e70",
+  "transactionSettings": {
+    "chainId": 11155111,
+    "nonce": "394",
+    "baseFee": "11784897673",
+    "priorityFee": "10000000"
+  },
+  "source": "/home/plopmenz/foundry-template",
+  "deployments": [
+    {
+      "id": "DeployCounter",
+      "deploymentAddress": "0x70114A6405F341F4AAe67f0C7a889d873a5c0202",
+      "constructorArgs": [],
+      "artifact": {
+        "abi": [
+          {
+            "type": "function",
+            "name": "getNumber",
+            "inputs": [],
+            "outputs": [
+              { "name": "", "type": "uint256", "internalType": "uint256" }
+            ],
+            "stateMutability": "view"
+          },
+          {
+            "type": "function",
+            "name": "increment",
+            "inputs": [],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+          },
+          {
+            "type": "function",
+            "name": "setNumber",
+            "inputs": [
+              {
+                "name": "newNumber",
+                "type": "uint256",
+                "internalType": "uint256"
+              }
+            ],
+            "outputs": [],
+            "stateMutability": "nonpayable"
+          }
+        ],
+        "bytecode": "0x608080604052346100155760d2908161001a8239f35b5f80fdfe608060405260043610156010575f80fd5b5f3560e01c80633fb5c1cb146086578063d09de08a1460545763f2c9ecd8146036575f80fd5b346050575f36600319011260505760205f54604051908152f35b5f80fd5b346050575f3660031901126050575f545f1981146072576001015f55005b634e487b7160e01b5f52601160045260245ffd5b3460505760203660031901126050576004355f5500fea2646970667358221220079c3b3b452d80748e93562f4c8ad6622693205ce4fb0a8fce269b0a7e22b7cf64736f6c63430008170033",
+        "compiler": { "version": "v0.8.23+commit.f704f362" },
+        "contractName": "src/Counter.sol:Counter",
+        "jsonDescription": {
+          "language": "Solidity",
+          "sources": {
+            "src/Counter.sol": {
+              "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract Counter {\n    uint256 private number;\n\n    function getNumber() external view virtual returns (uint256) {\n        return number;\n    }\n\n    function setNumber(uint256 newNumber) external virtual {\n        number = newNumber;\n    }\n\n    function increment() external virtual {\n        number++;\n    }\n}\n"
+            }
+          },
+          "settings": {
+            "remappings": ["forge-std/=lib/forge-std/src/"],
+            "optimizer": { "enabled": true, "runs": 200 },
+            "evmVersion": "shanghai",
+            "viaIR": true
+          },
+          "metadata": { "useLiteralContent": true }
+        },
+        "license": "MIT"
+      }
+    }
+  ],
+  "submitted": {
+    "transactionHash": "0xbe95f0f09ff03e8a904d33e4eb77d05f398e3616c7de60f8fc5e7713d3f43b87",
+    "date": "2024-07-15T13:55:06.194Z"
+  }
+}
